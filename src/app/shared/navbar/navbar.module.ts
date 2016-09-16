@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { NavbarComponent } from './index';
 
@@ -8,7 +9,8 @@ import { NavbarComponent } from './index';
         NavbarComponent
     ],
     imports: [
-        RouterModule
+        RouterModule,
+        BrowserModule
     ],
     exports: [
         NavbarComponent
