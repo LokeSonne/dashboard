@@ -1,0 +1,20 @@
+.navbar {
+    border: none !important;
+    border-radius: 0 !important;
+    background-color: #222 !important;
+    .navbar-brand {
+        color: white !important;
+    }
+    ul.nav {
+        li {
+            a {
+                color: white !important;
+                font-weight: 100;
+                font-size: 16px;
+            }
+            a:hover {
+                background-color: #444 !important;
+            }
+        }
+    }
+}
