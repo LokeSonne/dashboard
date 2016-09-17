@@ -1,5 +1,5 @@
 export const MAIN = {
     APP: {
-        BRAND: 'Visuate'
+        BRAND: 'Visuate Dashboard'
     }
 };

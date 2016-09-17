@@ -88,6 +88,7 @@ module.exports = function () {
                     middleware: [historyApiFallback()],
                     routes: {
                         "/node_modules": "node_modules",
+                        "/deps_manual": "deps_manual",
                         "/src": "src"
                     }
                 },
@@ -99,14 +100,16 @@ module.exports = function () {
                     app + "**/*.css",
                     app + "**/*.scss",
                     app + "**/*.html"
-                ]
+                ],
+                notify: false
             },
             prod: {
                 port: 3001,
                 server: {
                     baseDir: './' + build.path,
                     middleware: [historyApiFallback()]
-                }
+                },
+                notify: false
             }
         };
 

@@ -13,6 +13,7 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a (click)='_auth.login()' *ngIf="!_auth.authenticated()">Login</a></li>
+                <li><a [routerLink]="['/dashboard']" *ngIf="_auth.authenticated()">Dashboard</a></li>
                 <li><a (click)='_auth.logout()' *ngIf="_auth.authenticated()">Logout</a></li>
             </ul>
         </div>

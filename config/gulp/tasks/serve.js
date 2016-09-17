@@ -14,7 +14,7 @@ if (envConfig.ENV === envConfig.ENVS.DEV)
     }
 
     /* Start live server dev mode */
-    gulp.task('serve-dev', ['sass', 'sass:modules', 'tsc-app', 'watch-ts', 'watch-sass'], function ()
+    gulp.task('serve-dev', ['sass', 'sass:modules', 'tsc-app', 'watch-ts', 'watch-sass', 'watch-env'], function ()
     {
         startBrowsersync(config.browserSync.dev);
     });

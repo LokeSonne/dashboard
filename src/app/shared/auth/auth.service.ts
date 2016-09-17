@@ -1,6 +1,5 @@
 import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt/angular2-jwt';
-// import { Auth0Lock } from 'auth0-lock';
 
 import { CONSTANTS } from '../index';
 
@@ -9,29 +8,34 @@ declare var Auth0Lock: any;
 
 @Injectable()
 export class Auth {
-    // Configure Auth0
-    lock = new Auth0Lock(CONSTANTS.ENV.AUTH0_CLIENT_ID, CONSTANTS.ENV.AUTH0_DOMAIN, {});
+    public user: Object;
+    private _lock = new Auth0Lock(CONSTANTS.ENV.AUTH0_CLIENT_ID, CONSTANTS.ENV.AUTH0_DOMAIN, {});
 
     constructor() {
-        // Add callback for lock `authenticated` event
-        this.lock.on('authenticated', (authResult) => {
-            localStorage.setItem('id_token', authResult.idToken);
+        this._lock.on('authenticated', (authResult) => {
+            this._authenticatedCallback(authResult);
         });
     }
 
     public login() {
-        // Call the show method to display the widget.
-        this.lock.show();
+        this._lock.show();
     };
 
     public authenticated(): boolean {
-        // Check if there's an unexpired JWT
-        // This searches for an item in localStorage with key == 'id_token'
-        return tokenNotExpired();
+        return tokenNotExpired('id_token');
     };
 
     public logout() {
-        // Remove token from localStorage
         localStorage.removeItem('id_token');
+        localStorage.removeItem('visuate-profile');
     };
+
+    private _authenticatedCallback(authResult): void {
+        localStorage.setItem('id_token', authResult.idToken);
+        this._lock.getProfile(authResult.idToken, (error, profile) => {
+            if (error) { console.error(error); return; }
+            localStorage.setItem('visuate-profile', JSON.stringify(profile));
+            this.user = profile;
+        });
+    }
 }

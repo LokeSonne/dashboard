@@ -14,7 +14,7 @@ var envVars = require('../utils/env-vars');
 require('@ngstarter/systemjs-extension')(config);
 
 gulp.task('build', function (done) {
-    runSequence('test', 'build-systemjs', 'build-assets', done);
+    runSequence('env', 'test', 'build-systemjs', 'build-assets', done);
 });
 
 /* Concat and minify/uglify all css, js, and copy fonts */
@@ -23,21 +23,21 @@ gulp.task('build-assets', function (done) {
         gulp.src(config.app + '**/*.html', {
             base: config.app
         })
-        .pipe(gulp.dest(config.build.app));
+            .pipe(gulp.dest(config.build.app));
 
         gulp.src(config.app + '**/*.css', {
             base: config.app
         })
-        .pipe(cssnano())
-        .pipe(gulp.dest(config.build.app));
+            .pipe(cssnano())
+            .pipe(gulp.dest(config.build.app));
 
         gulp.src(config.src + 'favicon.ico')
-        .pipe(gulp.dest(config.build.path));
+            .pipe(gulp.dest(config.build.path));
 
         gulp.src(config.assetsPath.images + '**/*.*', {
             base: config.assetsPath.images
         })
-        .pipe(gulp.dest(config.build.assetPath + 'images'));
+            .pipe(gulp.dest(config.build.assetPath + 'images'));
 
         gulp.src(config.index)
             .pipe(useref())
@@ -55,12 +55,12 @@ gulp.task('fonts', function () {
     gulp.src(config.assetsPath.fonts + '**/*.*', {
         base: config.assetsPath.fonts
     })
-    .pipe(gulp.dest(config.build.fonts));
+        .pipe(gulp.dest(config.build.fonts));
 
     gulp.src([
         'node_modules/font-awesome/fonts/*.*'
     ])
-    .pipe(gulp.dest(config.build.fonts));
+        .pipe(gulp.dest(config.build.fonts));
 });
 
 gulp.task('env', function () {
@@ -72,4 +72,8 @@ gulp.task('env', function () {
         .on('finish', function () {
             util.log(config.app + 'shared/constant/env.ts is generated successfully');
         });
+});
+
+gulp.task('watch-env', function () {
+    gulp.watch('env.json', ['env']);
 });
