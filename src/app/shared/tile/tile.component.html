@@ -2,7 +2,10 @@
     <div class="vs-tile">
         <div class="vs-header">
             <span class="vs-title gs-drag-handle">{{title}}</span>
-            <i class="vs-header-icon vs-toggle fa fa-angle-down" aria-hidden="true"></i>
+            <!-- <i class="vs-header-icon vs-toggle fa fa-angle-down" aria-hidden="true"></i> -->
+        </div>
+        <div class="vs-body">
+            <base-chart class="chart" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></base-chart>
         </div>
     </div>
 </div>

@@ -2,6 +2,7 @@
     border: none !important;
     border-radius: 0 !important;
     background-color: #222 !important;
+    margin-bottom: 0 !important;
     .navbar-brand {
         color: white !important;
     }
@@ -30,12 +31,12 @@
         li {
             a {
                 color: white !important;
-                background-color: #444;
+                //background-color: #444;
                 font-weight: 200;
                 font-size: 16px;
             }
             a:hover {
-                background-color: #555;
+                background-color: #444;
             }
         }
     }

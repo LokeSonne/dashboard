@@ -1,2 +1,9 @@
 h4 {
   color: gray; }
+
+.container-fluid {
+  padding: 0 !important; }
+
+.carousel img {
+  width: 100% !important;
+  height: auto !important; }

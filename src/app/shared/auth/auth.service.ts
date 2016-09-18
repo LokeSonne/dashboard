@@ -1,5 +1,6 @@
-import { Injectable }      from '@angular/core';
+import { Injectable } from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt/angular2-jwt';
+import { Router } from '@angular/router';
 
 import { CONSTANTS } from '../index';
 
@@ -11,7 +12,7 @@ export class Auth {
     public user: Object;
     private _lock = new Auth0Lock(CONSTANTS.ENV.AUTH0_CLIENT_ID, CONSTANTS.ENV.AUTH0_DOMAIN, {});
 
-    constructor() {
+    constructor(private _router: Router) {
         this._lock.on('authenticated', (authResult) => {
             this._authenticatedCallback(authResult);
         });
@@ -28,6 +29,7 @@ export class Auth {
     public logout() {
         localStorage.removeItem('id_token');
         localStorage.removeItem('visuate-profile');
+        this._router.navigate(['/']);
     };
 
     private _authenticatedCallback(authResult): void {
@@ -37,5 +39,6 @@ export class Auth {
             localStorage.setItem('visuate-profile', JSON.stringify(profile));
             this.user = profile;
         });
+        this._router.navigate(['/dashboard']);
     }
 }
