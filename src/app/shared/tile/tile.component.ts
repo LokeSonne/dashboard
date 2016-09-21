@@ -1,16 +1,25 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { Api } from '../';
 
 @Component({
     selector: 'vs-tile',
     templateUrl: 'app/shared/tile/tile.component.html',
     styleUrls: ['app/shared/tile/tile.component.css'],
+    providers: [Api]
 })
-export class TileComponent {
+export class TileComponent implements OnInit {
+    private _observables: Observable<Response>[] = [];
+
     @Input() title: string;
     @Input() xs_size: number;
     @Input() sm_size: number;
     @Input() md_size: number;
     @Input() lg_size: number;
+    @Input() type: string;
+
+    constructor(private _api: Api) { }
 
     public barChartOptions: any = {
         scaleShowVerticalLines: false,
@@ -32,5 +41,19 @@ export class TileComponent {
 
     public chartHovered(e: any): void {
         console.log(e);
+    }
+
+    ngOnInit(): void {
+        let obs = this._api.getData(this.type);
+        this._observables.push(obs);
+        obs.subscribe(
+            res => {
+                console.log('Request success!');
+                console.log(res);
+            },
+            err => {
+                console.log('Request error!');
+                console.log(err);
+            });
     }
 }

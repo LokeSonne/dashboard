@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AUTH_PROVIDERS } from 'angular2-jwt/angular2-jwt';
+import { HttpModule } from '@angular/http';
 
 import { APP_PROVIDERS } from './app.providers';
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { TodolistModule } from './todolist/todolist.module';
         AppComponent
     ],
     imports: [
+        HttpModule,
         BrowserModule,
         NavbarModule,
         TileModule,
